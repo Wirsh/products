@@ -5,6 +5,7 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 public class Summizer {
@@ -15,7 +16,7 @@ public class Summizer {
             XSSFSheet sheet = workbook.getSheetAt(0);
             Iterator<Row> iterator = sheet.iterator();
             Map<String, Double> products = new HashMap<>();
-            for (int i =0; i<61; i++) {
+            for (int i =0; i<71; i++) {
                 Row row = iterator.next();
                 if(row.getRowNum()!=0){
                     double sum;
@@ -30,7 +31,7 @@ public class Summizer {
                 }
 
             }
-            for (String key: products.keySet()) {
+            for (String key: products.keySet().stream().sorted().collect(Collectors.toList())) {
                 System.out.println(key +"  "+products.get(key));
             }
         } catch (IOException e) {
